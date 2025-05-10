@@ -18,18 +18,16 @@ class Solution:
 
         ## Solution using backtracking
         res = []
-        subset = []
 
-        def dfs(i):
-            if i >= len(nums):
-                res.append(subset.copy())
-                return
-            subset.append(nums[i])
-            dfs(i + 1)
-            subset.pop()
-            dfs(i + 1)
+        def dfs(i, subset):
+            res.append(subset.copy())
 
-        dfs(0)
+            for idx in range(i, len(nums)):
+                subset.append(nums[idx])
+                dfs(idx+1, subset)
+                subset.pop()    
+
+        dfs(0, [])
         return res
 
 
