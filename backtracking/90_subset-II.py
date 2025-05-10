@@ -3,6 +3,7 @@ from typing import List
 
 class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        # sorting helps to group all duplicates together, which is useful to skip all duplicates easily once the first value has been processed (see the while/for loop below)
         nums.sort()
         res = []
         subset = []
@@ -30,6 +31,9 @@ class Solution:
             res.append(subset.copy())
 
             for idx in range(i, len(nums)):
+                # The idea here is that the first instance of the duplicates takes care of all possible subsets for that number
+                # So any duplicate for the first num or any of the other duplicates is alredy covered by the first instance
+                # Once first instance is processed (idx > i), we can skip all the duplicates and go straight to processing the next distinct value
                 if idx > i and nums[idx] == nums[idx-1]:
                     continue
 
