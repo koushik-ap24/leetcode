@@ -10,14 +10,14 @@ class Interval(object):
 class Solution:
     ## Optimal solution - Min Heap
     def minMeetingRooms(self, intervals: List[Interval]) -> int:
-        intervals.sort(key=lambda x: x.start)
+        intervals.sort(key=lambda x: x.end)
         # Min heap keeps track of the ending times of the rooms we need to use
-        min_heap = [intervals[0]]
+        min_heap = []
 
-        for interval in intervals[1:]:
+        for interval in intervals:
             # If meeting starts after the earliest ending meeting, reuse that same room and update its ending time
             # Otherwise, add a new room and update its end time.
-            if min_heap[0] <= interval.start:
+            if min_heap and min_heap[0] <= interval.start:
                 heapq.heappop(min_heap)
             heapq.heappush(min_heap, interval.end)
 
