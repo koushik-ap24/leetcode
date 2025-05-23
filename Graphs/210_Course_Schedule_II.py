@@ -38,7 +38,7 @@ class Solution:
         ## Iterate through nodes and find the cycle
         for node in graph:
             if node not in visited:
-                # Return false if a cycle is detected
+                # Return [] if a cycle is detected
                 if dfs(node):
                     return []
         
