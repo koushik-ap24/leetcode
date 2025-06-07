@@ -2,7 +2,7 @@ from typing import List
 
 class Solution:
     def restoreIpAddresses(self, s: str) -> List[str]:
-        ## MY approach - backtracking by keepint track of current number being formed
+        ## MY approach - backtracking by keeping track of current number being formed
         res = []
         address = []
 
