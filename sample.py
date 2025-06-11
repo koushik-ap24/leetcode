@@ -90,3 +90,7 @@ def rightmost_leq(arr, target):
 arr = [1,2,3,4,5]
 target = 1
 print(rightmost_leq(arr, target))
+
+dp = [[] for _ in range(5)] 
+dp[0].append(2)
+print(dp)
