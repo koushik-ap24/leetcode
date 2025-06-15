@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
         ## Approach 1: Hash Set
