@@ -39,3 +39,25 @@ slots = [
 availability = ("13:20", "14:20")
 print(findLunchMates(slots, availability))
 
+from collections import defaultdict
+import heapq
+conferences = defaultdict(int)
+
+def vote(conference: str, votes: int) -> None:
+    conferences[conference] += conferences[conference] + votes
+
+def getTopK(threshold: int):
+    # Use heap for this
+    heap = []
+    for conference, votes in conferences.items():
+        if len(heap) >= threshold and heap[0][0] < votes:
+            heapq.heappop(heap)
+        heapq.heappush(heap, (votes, conference))
+
+    # Get top K conferences in order of votes, then alphabetically
+    res = []
+    while heap:
+        res.append(heapq.heappop(heap)[1])
+    return res
+        
+
