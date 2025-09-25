@@ -8,49 +8,34 @@ class ListNode:
 
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        if list1 == None:
-            return list2
+        if not list1 or not list2:
+            return list1 if list1 else list2
         
-        if list2 == None:
-            return list1
-        
+        head = curr = None
         ptr1 = list1
         ptr2 = list2
-        merged = None
-        newNext = None
 
-        if ptr1.val <= ptr2.val:
-            merged = ptr1
-            newNext = ptr1.next
-            ptr1.next = None
-            ptr1 = newNext
-        else:
-            merged = ptr2
-            newNext = ptr2.next
-            ptr2.next = None
-            ptr2 = newNext
-
-        ptr_merged = merged
-
-        while ptr1 != None and ptr2 != None:
-            if ptr1.val > ptr2.val:
-                print(f"branch 1")
-                ptr_merged.next = ptr2
-                ptr_merged = ptr2
-                newNext = ptr2.next
-                ptr2.next = None
-                ptr2 = newNext
+        while ptr1 and ptr2:
+            if ptr1.val <= ptr2.val:
+                if not curr:
+                    curr = head = ptr1
+                else:
+                    curr.next = ptr1
+                
+                curr = ptr1
+                ptr1 = ptr1.next
+            
             else:
-                print(f"branch 2")
-                ptr_merged.next = ptr1
-                ptr_merged = ptr1
-                newNext = ptr1.next
-                ptr1.next = None
-                ptr1 = newNext
+                if not curr:
+                    curr = head = ptr2
+                else:
+                    curr.next = ptr2
+                
+                curr = ptr2
+                ptr2 = ptr2.next
         
-        ptr_merged.next = ptr1 or ptr2
-
-        return merged
+        curr.next = ptr1 if ptr1 else ptr2
+        return head
 
 
 
